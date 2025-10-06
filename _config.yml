@@ -1,0 +1,27 @@
+# GitHub Pages Configuration
+theme: jekyll-theme-minimal
+title: CAES RAG Operations
+description: Interactive documentation for the CAES Intranet Help Bot RAG system
+show_downloads: false
+
+# Plugins
+plugins:
+  - jekyll-relative-links
+
+# Configuration
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Include files
+include:
+  - README.md
+  - index.html
+  - styles.css
+  - script.js
+
+# Exclude files
+exclude:
+  - .gitignore
+  - LICENSE
