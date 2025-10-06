@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/sa69508/VSCODE/intranetChatbot/**)",
+      "Read(//c/Users/sa69508/VSCODE/intranetChatbot/src/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
