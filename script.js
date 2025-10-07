@@ -584,27 +584,65 @@ function loadDocs() {
 
 // Setup navigation
 function setupNav() {
+    // Navigation function for all links
+    function navigateTo(id) {
+        // Update active states
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+        // Show document
+        document.querySelectorAll('.document').forEach(doc => doc.classList.remove('active'));
+        const targetDoc = document.getElementById(id);
+        if (targetDoc) {
+            targetDoc.classList.add('active');
+
+            // Update active nav link if not going to welcome
+            if (id !== 'welcome') {
+                const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                if (navLink) navLink.classList.add('active');
+            }
+        }
+    }
+
+    // Handle sidebar navigation links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const id = this.getAttribute('href').slice(1);
-
-            // Update active states
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-
-            // Show document
-            document.querySelectorAll('.document').forEach(doc => doc.classList.remove('active'));
-            const doc = document.getElementById(id);
-            if (doc) doc.classList.add('active');
+            navigateTo(id);
+            window.location.hash = id;
         });
     });
 
-    // Handle hash
+    // Handle quick links on welcome page
+    document.querySelectorAll('.btn-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = this.getAttribute('href').slice(1);
+            navigateTo(id);
+            window.location.hash = id;
+        });
+    });
+
+    // Handle home link
+    document.querySelectorAll('.home-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateTo('welcome');
+            window.location.hash = '';
+        });
+    });
+
+    // Handle hash on load
     if (window.location.hash) {
-        const link = document.querySelector(`a[href="${window.location.hash}"]`);
-        if (link) link.click();
+        const id = window.location.hash.slice(1);
+        navigateTo(id);
     }
+
+    // Handle hash changes (browser back/forward)
+    window.addEventListener('hashchange', function() {
+        const id = window.location.hash ? window.location.hash.slice(1) : 'welcome';
+        navigateTo(id);
+    });
 }
 
 // Setup search
