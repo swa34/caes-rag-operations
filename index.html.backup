@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CAES RAG System - Interactive Documentation</title>
+    <meta name="description" content="Interactive, verified docs for the CAES Intranet Help Bot RAG system." />
+    <meta property="og:title" content="CAES RAG System - Interactive Documentation" />
+    <meta property="og:description"
+        content="25+ verified features • 13+ optimizations • Interactive, filterable docs." />
+    <meta name="theme-color" content="#1a365d" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Skip link for keyboard users -->
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <nav class="navbar" role="navigation" aria-label="Main">
+        <div class="container">
+            <div class="nav-brand">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav"
+                    aria-label="Toggle navigation">☰</button>
+                <span class="logo" aria-hidden="true">📊</span>
+                <h1>CAES RAG System</h1>
+            </div>
+
+            <ul id="primary-nav" class="nav-links" data-collapsible="true">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#pipeline">Pipeline</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#optimizations">Optimizations</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li class="nav-actions">
+                    <button id="darkToggle" class="pill-btn" type="button" aria-pressed="false"
+                        title="Toggle dark mode">🌙</button>
+                    <div class="export-dropdown">
+                        <button id="exportBtn" class="pill-btn" type="button" aria-haspopup="true"
+                            aria-expanded="false">Export ▾</button>
+                        <div class="export-menu" role="menu" aria-label="Export">
+                            <button data-export="json" role="menuitem">Download JSON</button>
+                            <button data-export="print" role="menuitem">Print</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" id="top">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">
+                    <span class="gradient-text">CAES Intelligent RAG System</span><br />
+                    Technical Documentation
+                </h2>
+                <p class="hero-subtitle">
+                    Enterprise-grade AI-powered information retrieval with 25+ verified features and 13+ performance
+                    optimizations
+                </p>
+                <div class="hero-stats" aria-label="Key stats">
+                    <div class="stat">
+                        <div class="stat-number">5-Stage</div>
+                        <div class="stat-label">Retrieval Pipeline</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">210</div>
+                        <div class="stat-label">Acronyms Expanded</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label">Verified Features</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">13+</div>
+                        <div class="stat-label">Optimizations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        <section id="overview" class="section">
+            <div class="container">
+                <h2 class="section-title">System Overview</h2>
+                <p class="section-intro">
+                    The CAES Intranet Help Bot is a production-ready RAG system delivering accurate, contextual
+                    responses
+                    about UGA CAES resources, policies, and procedures. <!-- structure already present -->
+                </p>
+                <div class="overview-grid" aria-live="polite">
+                    <div class="overview-card">
+                        <div class="card-icon" aria-hidden="true">🧠</div>
+                        <h3>Advanced Retrieval Pipeline</h3>
+                        <p>Five-stage hybrid architecture: acronym expansion, metadata filtering, vector search,
+                            feedback learning, and LLM re-ranking.</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="card-icon" aria-hidden="true">💾</div>
+                        <h3>Enterprise Database Integration</h3>
+                        <p>PostgreSQL-backed persistence for conversation history, feedback, and session lifecycle.</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="card-icon" aria-hidden="true">⚡</div>
+                        <h3>Performance Engineering</h3>
+                        <p>In-memory caching, trigger heuristics, batching, and graceful fallbacks.</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="card-icon" aria-hidden="true">🔒</div>
+                        <h3>Production-Grade Infrastructure</h3>
+                        <p>Auth, health checks, error handling, and security best practices.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pipeline" class="section section-dark" aria-label="5-Stage Retrieval Pipeline">
+            <div class="container">
+                <h2 class="section-title">5-Stage Retrieval Pipeline</h2>
+                <p class="section-intro">Multi-layered retrieval to ensure accurate, relevant results.</p>
+                <div class="pipeline-visualization" id="pipelineStages"></div>
+            </div>
+        </section>
+
+        <section id="features" class="section" aria-label="Core Features">
+            <div class="container">
+                <h2 class="section-title">Core Features</h2>
+
+                <!-- Search injected here by script -->
+                <div class="feature-filters" role="tablist" aria-label="Feature categories">
+                    <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All
+                        Features</button>
+                    <button class="filter-btn" data-filter="retrieval" role="tab"
+                        aria-selected="false">Retrieval</button>
+                    <button class="filter-btn" data-filter="conversation" role="tab"
+                        aria-selected="false">Conversation</button>
+                    <button class="filter-btn" data-filter="processing" role="tab"
+                        aria-selected="false">Processing</button>
+                    <button class="filter-btn" data-filter="infrastructure" role="tab"
+                        aria-selected="false">Infrastructure</button>
+                </div>
+
+                <div class="features-grid" id="featuresGrid" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section id="optimizations" class="section section-dark" aria-label="Performance Optimizations">
+            <div class="container">
+                <h2 class="section-title">Performance Optimizations</h2>
+                <div class="optimizations-grid" id="optimizationsGrid"></div>
+            </div>
+        </section>
+
+        <section id="architecture" class="section" aria-label="System Architecture">
+            <div class="container">
+                <h2 class="section-title">System Architecture</h2>
+                <div class="architecture-diagram" id="architectureDiagram"></div>
+                <div class="tech-stack">
+                    <h3>Technology Stack</h3>
+                    <div class="tech-grid" id="techGrid"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Explore the Implementation</h2>
+                    <p>Access the complete source code and technical details.</p>
+                    <a href="https://github.com/swa34/CAES-INTRANET-HELP-BOT" class="cta-button" target="_blank"
+                        rel="noopener noreferrer">View Repository on GitHub →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; 2025 CAES RAG Operations</p>
+            <p class="footer-meta">Built for internal documentation and demos.</p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
