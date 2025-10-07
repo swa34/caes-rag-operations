@@ -56,6 +56,13 @@ if (shouldRerank) {
                 <li>Handles complex comparisons</li>
                 <li>Graceful fallback if fails</li>
             </ul>
+
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://developer.nvidia.com/blog/enhancing-rag-pipelines-with-re-ranking/" target="_blank">NVIDIA: Enhancing RAG Pipelines with Re-ranking</a></li>
+                <li><a href="https://www.pinecone.io/learn/series/rag/rerankers/" target="_blank">Pinecone: Understanding Rerankers</a></li>
+                <li><a href="https://arxiv.org/abs/2310.06839" target="_blank">Research Paper: LLM-based Reranking</a></li>
+            </ul>
         `
     },
 
@@ -107,6 +114,13 @@ if (categories) {
                     <span class="metric-value">~40%</span>
                 </div>
             </div>
+
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://www.pinecone.io/learn/filtering/" target="_blank">Pinecone: Metadata Filtering Guide</a></li>
+                <li><a href="https://docs.llamaindex.ai/en/stable/examples/vector_stores/pinecone_metadata_filter/" target="_blank">LlamaIndex: Metadata Filtering Examples</a></li>
+                <li><a href="https://www.mongodb.com/resources/products/capabilities/vector-search-metadata-filtering" target="_blank">MongoDB: Vector Search with Metadata</a></li>
+            </ul>
         `
     },
 
@@ -160,6 +174,13 @@ function expandAcronyms(query) {
                     <span class="metric-value">8-12%</span>
                 </div>
             </div>
+
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://ai.meta.com/blog/retrieval-augmented-generation-streamlining-the-creation-of-intelligent-natural-language-processing-models/" target="_blank">Meta: RAG Best Practices</a></li>
+                <li><a href="https://www.anthropic.com/research/contextual-retrieval" target="_blank">Anthropic: Contextual Retrieval</a></li>
+                <li><a href="https://eugeneyan.com/writing/llm-patterns/#expand-acronyms-and-abbreviations" target="_blank">Eugene Yan: LLM Patterns for Search</a></li>
+            </ul>
         `
     },
 
@@ -227,6 +248,13 @@ CREATE TABLE conversations (
                     <span class="metric-value">~5ms</span>
                 </div>
             </div>
+
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/conversation-design" target="_blank">Anthropic: Conversation Design</a></li>
+                <li><a href="https://platform.openai.com/docs/guides/conversation" target="_blank">OpenAI: Building Conversational AI</a></li>
+                <li><a href="https://www.postgresql.org/docs/current/datatype-json.html" target="_blank">PostgreSQL: JSON Types for Sessions</a></li>
+            </ul>
         `
     },
 
@@ -271,6 +299,13 @@ CREATE TABLE conversations (
                     <span class="metric-value">3 turns</span>
                 </div>
             </div>
+
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://www.pinecone.io/learn/query-understanding/" target="_blank">Pinecone: Query Understanding for RAG</a></li>
+                <li><a href="https://arxiv.org/abs/2305.14283" target="_blank">Research: Query Rewriting for RAG</a></li>
+                <li><a href="https://docs.llamaindex.ai/en/stable/examples/query_transformations/query_transform_cookbook/" target="_blank">LlamaIndex: Query Transformation Cookbook</a></li>
+            </ul>
         `
     },
 
@@ -322,6 +357,13 @@ CREATE TABLE conversations (
                     <span class="metric-value">Preserved</span>
                 </div>
             </div>
+
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://www.pinecone.io/learn/chunking-strategies/" target="_blank">Pinecone: Chunking Strategies for RAG</a></li>
+                <li><a href="https://python.langchain.com/docs/how_to/#text-splitters" target="_blank">LangChain: Text Splitting Strategies</a></li>
+                <li><a href="https://www.llamaindex.ai/blog/evaluating-the-ideal-chunk-size-for-a-rag-system-using-llamaindex-6207e5d3fec5" target="_blank">LlamaIndex: Evaluating Chunk Sizes</a></li>
+            </ul>
         `
     },
 
@@ -372,6 +414,13 @@ match.score += adjustment;</code></pre>
                     <span class="metric-value">Google Sheets</span>
                 </div>
             </div>
+
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://openai.com/index/reinforcement-learning-from-human-feedback/" target="_blank">OpenAI: Reinforcement Learning from Human Feedback</a></li>
+                <li><a href="https://huggingface.co/blog/rlhf" target="_blank">Hugging Face: RLHF Explained</a></li>
+                <li><a href="https://www.anthropic.com/research/learning-from-human-preferences" target="_blank">Anthropic: Learning from Human Preferences</a></li>
+            </ul>
         `
     },
 
@@ -406,6 +455,13 @@ match.score += adjustment;</code></pre>
 }</code></pre>
                 <span class="code-ref">src/rag/ingestion/ingest.js</span>
             </div>
+
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://unstructured-io.github.io/unstructured/" target="_blank">Unstructured.io: Document Processing Library</a></li>
+                <li><a href="https://python.langchain.com/docs/how_to/#document-loaders" target="_blank">LangChain: Document Loaders</a></li>
+                <li><a href="https://docs.llamaindex.ai/en/stable/module_guides/loading/documents_and_nodes/" target="_blank">LlamaIndex: Loading Documents</a></li>
+            </ul>
         `
     },
 
@@ -455,6 +511,13 @@ const reader = new Readability(dom.window.document);
 const article = reader.parse();</code></pre>
                 <span class="code-ref">src/rag/crawlers/crawlIntranet.js</span>
             </div>
+
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://docs.scrapy.org/en/latest/" target="_blank">Scrapy: Web Crawling Framework</a></li>
+                <li><a href="https://cheerio.js.org/" target="_blank">Cheerio: Fast HTML Parsing</a></li>
+                <li><a href="https://github.com/mozilla/readability" target="_blank">Mozilla Readability: Content Extraction</a></li>
+            </ul>
         `
     },
 
@@ -513,6 +576,13 @@ const article = reader.parse();</code></pre>
                 <li>Generate response</li>
                 <li>Save conversation</li>
             </ol>
+
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://www.pinecone.io/learn/retrieval-augmented-generation/" target="_blank">Pinecone: RAG Architecture Deep Dive</a></li>
+                <li><a href="https://docs.llamaindex.ai/en/stable/understanding/rag/" target="_blank">LlamaIndex: Understanding RAG</a></li>
+                <li><a href="https://arxiv.org/abs/2005.11401" target="_blank">RAG Paper: Lewis et al. 2020</a></li>
+            </ul>
         `
     },
 
@@ -558,6 +628,13 @@ const article = reader.parse();</code></pre>
                 </div>
             </div>
             <p><em>Based on ~100 queries/day</em></p>
+
+            <h2>Learn More</h2>
+            <ul>
+                <li><a href="https://nodejs.org/docs/latest/api/" target="_blank">Node.js Documentation</a></li>
+                <li><a href="https://www.pinecone.io/pricing/" target="_blank">Pinecone Pricing & Features</a></li>
+                <li><a href="https://openai.com/api/pricing/" target="_blank">OpenAI API Pricing</a></li>
+            </ul>
         `
     }
 };

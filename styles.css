@@ -277,6 +277,22 @@ body {
     font-family: 'Fira Code', monospace;
 }
 
+/* Learn More Links */
+.document a {
+    color: #3B82F6;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.document a:hover {
+    color: #60A5FA;
+    text-decoration: underline;
+}
+
+.document a:visited {
+    color: #8B5CF6;
+}
+
 /* Metrics Grid */
 .metrics-grid {
     display: grid;
