@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building an Enterprise RAG System - Knowledge Library</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Global Search -->
+    <div class="search-bar-fixed">
+        <div class="container">
+            <input type="text" id="globalSearch" placeholder="🔍 Search the knowledge library..." class="search-input">
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo">📚</span>
+                <h1>RAG System Knowledge Library</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#intro">What is RAG?</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#tech-stack">Tech Stack</a></li>
+                <li><a href="#lessons">Lessons Learned</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Building an Enterprise
+                    <br><span class="gradient-text">RAG System</span>
+                </h1>
+                <p class="hero-subtitle">
+                    A comprehensive knowledge library documenting the architecture, implementation,
+                    and lessons learned from building a production-grade RAG system
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Pipeline Stages</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label">Features</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">13+</div>
+                        <div class="stat-label">Optimizations</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Documents</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- What is RAG Section -->
+    <section id="intro" class="section">
+        <div class="container">
+            <h2 class="section-title">What is a RAG System?</h2>
+
+            <div class="content-card">
+                <h3>📖 Retrieval-Augmented Generation Explained</h3>
+                <p class="large-text">
+                    <strong>RAG (Retrieval-Augmented Generation)</strong> combines large language models with external
+                    knowledge retrieval.
+                    Instead of relying only on training data, RAG systems first search a knowledge base for relevant
+                    information,
+                    then use that to generate accurate, contextual responses.
+                </p>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>✓ Up-to-date Information</h4>
+                        <p>Access current data without retraining</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>✓ Reduced Hallucinations</h4>
+                        <p>Grounded in real documents</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>✓ Source Attribution</h4>
+                        <p>Show where answers come from</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>✓ Domain-Specific</h4>
+                        <p>Specialize in your content</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>Our Use Case: CAES Intranet Help Bot</h4>
+                    <p>
+                        We built an intelligent assistant for UGA CAES staff to answer questions about internal
+                        procedures,
+                        Georgia Counts reporting, HR policies, and more. The system ingests 1000+ documents and provides
+                        instant, accurate answers with source citations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">The 5-Stage RAG Pipeline</h2>
+            <p class="section-intro">Each stage addresses different retrieval challenges for maximum accuracy</p>
+
+            <div class="pipeline-stages">
+                <div class="stage">
+                    <div class="stage-num">1</div>
+                    <div class="stage-content">
+                        <h3>Acronym Expansion</h3>
+                        <p class="what"><strong>What:</strong> Detects and expands 210 domain-specific acronyms</p>
+                        <p class="why"><strong>Why:</strong> "CAES travel" becomes "CAES (College of Agricultural and
+                            Environmental Sciences) travel" for better matching</p>
+                        <p class="how"><strong>How:</strong> In-memory PostgreSQL lookup, zero latency</p>
+                        <p class="impact"><strong>Impact:</strong> 8-12% accuracy boost</p>
+                        <code>src/rag/utils/acronymExpander.js</code>
+                    </div>
+                </div>
+
+                <div class="stage">
+                    <div class="stage-num">2</div>
+                    <div class="stage-content">
+                        <h3>Metadata Filtering</h3>
+                        <p class="what"><strong>What:</strong> Filters search by category before vector search</p>
+                        <p class="why"><strong>Why:</strong> "travel reimbursement" → search HR/finance docs only</p>
+                        <p class="how"><strong>How:</strong> Keyword detection triggers Pinecone metadata filters</p>
+                        <p class="impact"><strong>Impact:</strong> 15-25% precision improvement</p>
+                        <code>src/rag/vector-ops/retrieve.js</code>
+                    </div>
+                </div>
+
+                <div class="stage">
+                    <div class="stage-num">3</div>
+                    <div class="stage-content">
+                        <h3>Vector Search</h3>
+                        <p class="what"><strong>What:</strong> Semantic similarity search using embeddings</p>
+                        <p class="why"><strong>Why:</strong> Understands meaning, not just keywords</p>
+                        <p class="how"><strong>How:</strong> OpenAI text-embedding-3-large + Pinecone</p>
+                        <p class="impact"><strong>Impact:</strong> Core retrieval, ~300ms latency</p>
+                        <code>src/rag/utils/pineconeClient.js</code>
+                    </div>
+                </div>
+
+                <div class="stage">
+                    <div class="stage-num">4</div>
+                    <div class="stage-content">
+                        <h3>Feedback Learning</h3>
+                        <p class="what"><strong>What:</strong> Adjusts scores based on user feedback</p>
+                        <p class="why"><strong>Why:</strong> Learn from experience, boost helpful sources</p>
+                        <p class="how"><strong>How:</strong> Google Sheets → LLM scorer → PostgreSQL cache</p>
+                        <p class="impact"><strong>Impact:</strong> ±10% score adjustment</p>
+                        <code>src/rag/feedback/feedbackLearningPostgres.js</code>
+                    </div>
+                </div>
+
+                <div class="stage">
+                    <div class="stage-num">5</div>
+                    <div class="stage-content">
+                        <h3>LLM Re-ranking</h3>
+                        <p class="what"><strong>What:</strong> Semantic reordering when scores are uncertain</p>
+                        <p class="why"><strong>Why:</strong> LLMs catch nuances vectors miss</p>
+                        <p class="how"><strong>How:</strong> GPT-4o-mini, triggers on 20-30% of queries</p>
+                        <p class="impact"><strong>Impact:</strong> 70-80% cost savings vs always re-ranking</p>
+                        <code>src/rag/vector-ops/retrieve.js</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech-stack" class="section">
+        <div class="container">
+            <h2 class="section-title">Technology Stack</h2>
+
+            <div class="stack-layer">
+                <h3>🌐 Frontend & Client</h3>
+                <div class="stack-cards">
+                    <div class="stack-card">
+                        <h4>Web Interface</h4>
+                        <p>React-based chat UI with real-time messaging</p>
+                    </div>
+                    <div class="stack-card">
+                        <h4>REST API</h4>
+                        <p>JSON API with API key + Basic Auth</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stack-layer">
+                <h3>🚀 Application Layer</h3>
+                <div class="stack-cards">
+                    <div class="stack-card">
+                        <h4>Express.js Server</h4>
+                        <p>Node.js backend, async/await</p>
+                        <code>src/server.js</code>
+                    </div>
+                    <div class="stack-card">
+                        <h4>Conversation Memory</h4>
+                        <p>PostgreSQL sessions, 30-min TTL</p>
+                        <code>src/conversationMemoryPostgres.js</code>
+                    </div>
+                    <div class="stack-card">
+                        <h4>Question Reframing</h4>
+                        <p>LLM-powered context resolution</p>
+                        <code>src/questionReframer.js</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stack-layer highlight">
+                <h3>🧠 RAG Pipeline</h3>
+                <div class="stack-cards">
+                    <div class="stack-card">
+                        <h4>5-Stage Pipeline</h4>
+                        <p>Acronym → Metadata → Vector → Feedback → Re-rank</p>
+                        <code>src/rag/vector-ops/retrieve.js</code>
+                    </div>
+                    <div class="stack-card">
+                        <h4>Document Ingestion</h4>
+                        <p>PDF, Word, PPT, Excel, HTML processing</p>
+                        <code>src/rag/ingestion/ingest.js</code>
+                    </div>
+                    <div class="stack-card">
+                        <h4>Intelligent Chunking</h4>
+                        <p>1200 char max, 200 overlap, smart boundaries</p>
+                        <code>src/rag/ingestion/chunk.js</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stack-layer">
+                <h3>🗄️ Data Layer</h3>
+                <div class="stack-cards">
+                    <div class="stack-card">
+                        <h4>PostgreSQL</h4>
+                        <p>Conversations, sessions, feedback, acronyms</p>
+                    </div>
+                    <div class="stack-card">
+                        <h4>Pinecone</h4>
+                        <p>3072-dim vectors, metadata filtering</p>
+                    </div>
+                    <div class="stack-card">
+                        <h4>Google Sheets</h4>
+                        <p>Raw feedback collection + fallback</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stack-layer">
+                <h3>🤖 External Services</h3>
+                <div class="stack-cards">
+                    <div class="stack-card">
+                        <h4>OpenAI API</h4>
+                        <p>text-embedding-3-large, GPT-4o-mini</p>
+                        <p class="cost">~$0.075/month for 100 queries/day</p>
+                    </div>
+                    <div class="stack-card">
+                        <h4>Dropbox API</h4>
+                        <p>65+ Georgia Counts documents</p>
+                        <code>python/dropbox_api_processor.py</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lessons Learned Section -->
+    <section id="lessons" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Lessons Learned & Best Practices</h2>
+
+            <div class="lessons-grid">
+                <div class="lesson">
+                    <div class="lesson-icon">💡</div>
+                    <h3>Start Simple, Optimize Later</h3>
+                    <p><strong>Lesson:</strong> Started with basic vector search. Added features based on real usage
+                        data.</p>
+                    <p><strong>Insight:</strong> Don't over-engineer. Build instrumentation first, optimize based on
+                        logs.</p>
+                </div>
+
+                <div class="lesson">
+                    <div class="lesson-icon">⚡</div>
+                    <h3>Smart Triggers Save Money</h3>
+                    <p><strong>Lesson:</strong> LLM re-ranking every query was expensive. Triggering selectively saved
+                        70-80%.</p>
+                    <p><strong>Insight:</strong> Expensive operations should be conditional, not default.</p>
+                </div>
+
+                <div class="lesson">
+                    <div class="lesson-icon">🎯</div>
+                    <h3>Chunking is Everything</h3>
+                    <p><strong>Lesson:</strong> 500 chars too small (lost context), 2000 too large (poor precision).
+                        1200 was perfect.</p>
+                    <p><strong>Insight:</strong> Chunk size affects both quality and performance. Test extensively.</p>
+                </div>
+
+                <div class="lesson">
+                    <div class="lesson-icon">🔄</div>
+                    <h3>Feedback Loops Are Critical</h3>
+                    <p><strong>Lesson:</strong> Vector similarity alone isn't enough. User feedback is ground truth.</p>
+                    <p><strong>Insight:</strong> Build feedback collection from day one.</p>
+                </div>
+
+                <div class="lesson">
+                    <div class="lesson-icon">🛡️</div>
+                    <h3>Anti-Hallucination Rules Work</h3>
+                    <p><strong>Lesson:</strong> Early versions invented procedures. Strict system prompts eliminated
+                        this.</p>
+                    <p><strong>Insight:</strong> LLMs need explicit constraints. "NEVER invent" > "be helpful".</p>
+                </div>
+
+                <div class="lesson">
+                    <div class="lesson-icon">🚀</div>
+                    <h3>Graceful Degradation</h3>
+                    <p><strong>Lesson:</strong> External services fail. System should keep working.</p>
+                    <p><strong>Insight:</strong> Every dependency needs a fallback plan.</p>
+                </div>
+
+                <div class="lesson">
+                    <div class="lesson-icon">📊</div>
+                    <h3>Metadata > More Vectors</h3>
+                    <p><strong>Lesson:</strong> Filtering by category improved precision 15-25%.</p>
+                    <p><strong>Insight:</strong> Rich metadata enables smarter search.</p>
+                </div>
+
+                <div class="lesson">
+                    <div class="lesson-icon">🔍</div>
+                    <h3>Domain Knowledge is a Feature</h3>
+                    <p><strong>Lesson:</strong> Loading 210 acronyms improved accuracy 8-12%.</p>
+                    <p><strong>Insight:</strong> Your expertise should be in the system, not just docs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta-section">
+        <div class="container">
+            <h2>Explore the Full Implementation</h2>
+            <p>Dive into the codebase to see these features in action</p>
+            <a href="https://github.com/swa34/CAES-INTRANET-HELP-BOT" class="btn-primary" target="_blank">
+                View Source Code →
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Built for UGA College of Agricultural and Environmental Sciences</p>
+            <p class="footer-meta">A knowledge library documenting production RAG system architecture • Built by Scott
+                Allen</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- CAES Help Chatbot -->
+    <!--  <iframe src="https://hospitalitychatbot-r7f2j.sevalla.app/bubble.html"
+            id="caes-chatbot-iframe"
+            title="CAES Help Chatbot"
+            style="position: fixed; bottom: 0; right: 0; border: none;
+                   width: 100vw; height: 100vh; pointer-events: none; z-index: 9999;">
+    </iframe> -->
+</body>
+
+</html>
