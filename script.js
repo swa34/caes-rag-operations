@@ -1,8 +1,8 @@
 // All documentation content
 const docs = {
-    'llm-reranking': {
-        title: 'LLM Re-ranking',
-        content: `
+  'llm-reranking': {
+    title: 'LLM Re-ranking',
+    content: `
             <h1>LLM Re-ranking</h1>
             <p class="subtitle">Semantic reordering using GPT-4o-mini when vector scores are ambiguous</p>
 
@@ -63,12 +63,12 @@ if (shouldRerank) {
                 <li><a href="https://www.pinecone.io/learn/series/rag/rerankers/" target="_blank">Pinecone: Understanding Rerankers</a></li>
                 <li><a href="https://arxiv.org/abs/2310.06839" target="_blank">Research Paper: LLM-based Reranking</a></li>
             </ul>
-        `
-    },
+        `,
+  },
 
-    'metadata-filtering': {
-        title: 'Metadata Filtering',
-        content: `
+  'metadata-filtering': {
+    title: 'Metadata Filtering',
+    content: `
             <h1>Metadata Filtering</h1>
             <p class="subtitle">Query-aware category filtering before vector search</p>
 
@@ -117,16 +117,16 @@ if (categories) {
 
             <h2>Learn More</h2>
             <ul>
-                <li><a href="https://www.pinecone.io/learn/filtering/" target="_blank">Pinecone: Metadata Filtering Guide</a></li>
-                <li><a href="https://docs.llamaindex.ai/en/stable/examples/vector_stores/pinecone_metadata_filter/" target="_blank">LlamaIndex: Metadata Filtering Examples</a></li>
-                <li><a href="https://www.mongodb.com/resources/products/capabilities/vector-search-metadata-filtering" target="_blank">MongoDB: Vector Search with Metadata</a></li>
+                <li><a href="https://docs.pinecone.io/guides/search/filter-by-metadata" target="_blank">Pinecone: Metadata Filtering Guide</a></li>
+                <li><a href="https://developers.llamaindex.ai/python/examples/vector_stores/pinecone_metadata_filter/" target="_blank">LlamaIndex: Metadata Filtering Examples</a></li>
+                <li><a href="https://www.pinecone.io/learn/retrieval-augmented-generation/" target="_blank">Pinecone: RAG with Filtering</a></li>
             </ul>
-        `
-    },
+        `,
+  },
 
-    'acronym-expansion': {
-        title: 'Acronym Expansion',
-        content: `
+  'acronym-expansion': {
+    title: 'Acronym Expansion',
+    content: `
             <h1>Acronym Expansion</h1>
             <p class="subtitle">210 domain-specific acronyms expanded automatically</p>
 
@@ -181,12 +181,12 @@ function expandAcronyms(query) {
                 <li><a href="https://www.anthropic.com/research/contextual-retrieval" target="_blank">Anthropic: Contextual Retrieval</a></li>
                 <li><a href="https://eugeneyan.com/writing/llm-patterns/#expand-acronyms-and-abbreviations" target="_blank">Eugene Yan: LLM Patterns for Search</a></li>
             </ul>
-        `
-    },
+        `,
+  },
 
-    'conversation-memory': {
-        title: 'Conversation Memory',
-        content: `
+  'conversation-memory': {
+    title: 'Conversation Memory',
+    content: `
             <h1>PostgreSQL Conversation Memory</h1>
             <p class="subtitle">Persistent sessions with 30-min TTL and multi-instance support</p>
 
@@ -251,16 +251,16 @@ CREATE TABLE conversations (
 
             <h2>Learn More</h2>
             <ul>
-                <li><a href="https://docs.anthropic.com/en/docs/build-with-claude/conversation-design" target="_blank">Anthropic: Conversation Design</a></li>
-                <li><a href="https://platform.openai.com/docs/guides/conversation" target="_blank">OpenAI: Building Conversational AI</a></li>
+                <li><a href="https://docs.claude.com/en/docs/build-with-claude/conversation-design" target="_blank">Anthropic: Conversation Design</a></li>
                 <li><a href="https://www.postgresql.org/docs/current/datatype-json.html" target="_blank">PostgreSQL: JSON Types for Sessions</a></li>
+                <li><a href="https://python.langchain.com/docs/how_to/chatbots_memory/" target="_blank">LangChain: Chat Memory</a></li>
             </ul>
-        `
-    },
+        `,
+  },
 
-    'question-reframing': {
-        title: 'Question Reframing',
-        content: `
+  'question-reframing': {
+    title: 'Question Reframing',
+    content: `
             <h1>Question Reframing</h1>
             <p class="subtitle">Converts context-dependent follow-ups into standalone queries</p>
 
@@ -302,16 +302,16 @@ CREATE TABLE conversations (
 
             <h2>Learn More</h2>
             <ul>
-                <li><a href="https://www.pinecone.io/learn/query-understanding/" target="_blank">Pinecone: Query Understanding for RAG</a></li>
                 <li><a href="https://arxiv.org/abs/2305.14283" target="_blank">Research: Query Rewriting for RAG</a></li>
-                <li><a href="https://docs.llamaindex.ai/en/stable/examples/query_transformations/query_transform_cookbook/" target="_blank">LlamaIndex: Query Transformation Cookbook</a></li>
+                <li><a href="https://developers.llamaindex.ai/python/examples/query_transformations/query_transform_cookbook/" target="_blank">LlamaIndex: Query Transformation Cookbook</a></li>
+                <li><a href="https://python.langchain.com/docs/how_to/query_transformations/" target="_blank">LangChain: Query Transformations</a></li>
             </ul>
-        `
-    },
+        `,
+  },
 
-    'intelligent-chunking': {
-        title: 'Intelligent Chunking',
-        content: `
+  'intelligent-chunking': {
+    title: 'Intelligent Chunking',
+    content: `
             <h1>Intelligent Chunking</h1>
             <p class="subtitle">Smart text segmentation with boundary detection</p>
 
@@ -364,12 +364,12 @@ CREATE TABLE conversations (
                 <li><a href="https://python.langchain.com/docs/how_to/#text-splitters" target="_blank">LangChain: Text Splitting Strategies</a></li>
                 <li><a href="https://www.llamaindex.ai/blog/evaluating-the-ideal-chunk-size-for-a-rag-system-using-llamaindex-6207e5d3fec5" target="_blank">LlamaIndex: Evaluating Chunk Sizes</a></li>
             </ul>
-        `
-    },
+        `,
+  },
 
-    'feedback-learning': {
-        title: 'Feedback Learning',
-        content: `
+  'feedback-learning': {
+    title: 'Feedback Learning',
+    content: `
             <h1>Feedback Learning</h1>
             <p class="subtitle">Adjusts retrieval scores based on user feedback</p>
 
@@ -417,16 +417,16 @@ match.score += adjustment;</code></pre>
 
             <h2>Learn More</h2>
             <ul>
-                <li><a href="https://openai.com/index/reinforcement-learning-from-human-feedback/" target="_blank">OpenAI: Reinforcement Learning from Human Feedback</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback" target="_blank">WIKI: Reinforcement Learning from Human Feedback</a></li>
                 <li><a href="https://huggingface.co/blog/rlhf" target="_blank">Hugging Face: RLHF Explained</a></li>
-                <li><a href="https://www.anthropic.com/research/learning-from-human-preferences" target="_blank">Anthropic: Learning from Human Preferences</a></li>
+                <li><a href="https://github.com/anthropics/hh-rlhf" target="_blank">Anthropic: Learning from Human Preferences</a></li>
             </ul>
-        `
-    },
+        `,
+  },
 
-    'multi-format': {
-        title: 'Multi-Format Processing',
-        content: `
+  'multi-format': {
+    title: 'Multi-Format Processing',
+    content: `
             <h1>Multi-Format Processing</h1>
             <p class="subtitle">Extract content from PDF, Word, PowerPoint, Excel, HTML</p>
 
@@ -458,16 +458,16 @@ match.score += adjustment;</code></pre>
 
             <h2>Learn More</h2>
             <ul>
-                <li><a href="https://unstructured-io.github.io/unstructured/" target="_blank">Unstructured.io: Document Processing Library</a></li>
+                <li><a href="https://docs.unstructured.io" target="_blank">Unstructured.io: Document Processing Library</a></li>
                 <li><a href="https://python.langchain.com/docs/how_to/#document-loaders" target="_blank">LangChain: Document Loaders</a></li>
-                <li><a href="https://docs.llamaindex.ai/en/stable/module_guides/loading/documents_and_nodes/" target="_blank">LlamaIndex: Loading Documents</a></li>
+                <li><a href="https://developers.llamaindex.ai/python/framework/module_guides/loading/documents_and_nodes/" target="_blank">LlamaIndex: Loading Documents</a></li>
             </ul>
-        `
-    },
+        `,
+  },
 
-    'crawlers': {
-        title: 'Authenticated Crawlers',
-        content: `
+  crawlers: {
+    title: 'Authenticated Crawlers',
+    content: `
             <h1>Authenticated Crawlers</h1>
             <p class="subtitle">8 specialized crawlers for password-protected sites</p>
 
@@ -518,12 +518,12 @@ const article = reader.parse();</code></pre>
                 <li><a href="https://cheerio.js.org/" target="_blank">Cheerio: Fast HTML Parsing</a></li>
                 <li><a href="https://github.com/mozilla/readability" target="_blank">Mozilla Readability: Content Extraction</a></li>
             </ul>
-        `
-    },
+        `,
+  },
 
-    'architecture': {
-        title: 'System Architecture',
-        content: `
+  architecture: {
+    title: 'System Architecture',
+    content: `
             <h1>System Architecture</h1>
             <p class="subtitle">5-layer architecture overview</p>
 
@@ -580,15 +580,15 @@ const article = reader.parse();</code></pre>
             <h2>Learn More</h2>
             <ul>
                 <li><a href="https://www.pinecone.io/learn/retrieval-augmented-generation/" target="_blank">Pinecone: RAG Architecture Deep Dive</a></li>
-                <li><a href="https://docs.llamaindex.ai/en/stable/understanding/rag/" target="_blank">LlamaIndex: Understanding RAG</a></li>
+                <li><a href="https://developers.llamaindex.ai/python/framework/understanding/rag/" target="_blank">LlamaIndex: Understanding RAG</a></li>
                 <li><a href="https://arxiv.org/abs/2005.11401" target="_blank">RAG Paper: Lewis et al. 2020</a></li>
             </ul>
-        `
-    },
+        `,
+  },
 
-    'tech-stack': {
-        title: 'Tech Stack',
-        content: `
+  'tech-stack': {
+    title: 'Tech Stack',
+    content: `
             <h1>Technology Stack</h1>
             <p class="subtitle">Complete technology choices</p>
 
@@ -635,123 +635,127 @@ const article = reader.parse();</code></pre>
                 <li><a href="https://www.pinecone.io/pricing/" target="_blank">Pinecone Pricing & Features</a></li>
                 <li><a href="https://openai.com/api/pricing/" target="_blank">OpenAI API Pricing</a></li>
             </ul>
-        `
-    }
+        `,
+  },
 };
 
 // Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    loadDocs();
-    setupNav();
-    setupSearch();
+document.addEventListener('DOMContentLoaded', function () {
+  loadDocs();
+  setupNav();
+  setupSearch();
 });
 
 // Load all documents
 function loadDocs() {
-    const viewer = document.getElementById('docContent');
+  const viewer = document.getElementById('docContent');
 
-    Object.keys(docs).forEach(id => {
-        const div = document.createElement('div');
-        div.id = id;
-        div.className = 'document';
-        div.innerHTML = docs[id].content;
-        viewer.appendChild(div);
-    });
+  Object.keys(docs).forEach(id => {
+    const div = document.createElement('div');
+    div.id = id;
+    div.className = 'document';
+    div.innerHTML = docs[id].content;
+    viewer.appendChild(div);
+  });
 }
 
 // Setup navigation
 function setupNav() {
-    // Navigation function for all links
-    function navigateTo(id) {
-        // Update active states
-        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  // Navigation function for all links
+  function navigateTo(id) {
+    // Update active states
+    document
+      .querySelectorAll('.nav-link')
+      .forEach(l => l.classList.remove('active'));
 
-        // Show document
-        document.querySelectorAll('.document').forEach(doc => doc.classList.remove('active'));
-        const targetDoc = document.getElementById(id);
-        if (targetDoc) {
-            targetDoc.classList.add('active');
+    // Show document
+    document
+      .querySelectorAll('.document')
+      .forEach(doc => doc.classList.remove('active'));
+    const targetDoc = document.getElementById(id);
+    if (targetDoc) {
+      targetDoc.classList.add('active');
 
-            // Update active nav link if not going to welcome
-            if (id !== 'welcome') {
-                const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
-                if (navLink) navLink.classList.add('active');
-            }
-        }
+      // Update active nav link if not going to welcome
+      if (id !== 'welcome') {
+        const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
+        if (navLink) navLink.classList.add('active');
+      }
     }
+  }
 
-    // Handle sidebar navigation links
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const id = this.getAttribute('href').slice(1);
-            navigateTo(id);
-            window.location.hash = id;
-        });
+  // Handle sidebar navigation links
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const id = this.getAttribute('href').slice(1);
+      navigateTo(id);
+      window.location.hash = id;
     });
+  });
 
-    // Handle quick links on welcome page
-    document.querySelectorAll('.btn-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const id = this.getAttribute('href').slice(1);
-            navigateTo(id);
-            window.location.hash = id;
-        });
+  // Handle quick links on welcome page
+  document.querySelectorAll('.btn-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const id = this.getAttribute('href').slice(1);
+      navigateTo(id);
+      window.location.hash = id;
     });
+  });
 
-    // Handle home link
-    document.querySelectorAll('.home-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            navigateTo('welcome');
-            window.location.hash = '';
-        });
+  // Handle home link
+  document.querySelectorAll('.home-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      navigateTo('welcome');
+      window.location.hash = '';
     });
+  });
 
-    // Handle hash on load
-    if (window.location.hash) {
-        const id = window.location.hash.slice(1);
-        navigateTo(id);
-    }
+  // Handle hash on load
+  if (window.location.hash) {
+    const id = window.location.hash.slice(1);
+    navigateTo(id);
+  }
 
-    // Handle hash changes (browser back/forward)
-    window.addEventListener('hashchange', function() {
-        const id = window.location.hash ? window.location.hash.slice(1) : 'welcome';
-        navigateTo(id);
-    });
+  // Handle hash changes (browser back/forward)
+  window.addEventListener('hashchange', function () {
+    const id = window.location.hash ? window.location.hash.slice(1) : 'welcome';
+    navigateTo(id);
+  });
 }
 
 // Setup search
 function setupSearch() {
-    const search = document.getElementById('docSearch');
+  const search = document.getElementById('docSearch');
 
-    search.addEventListener('input', function(e) {
-        const term = e.target.value.toLowerCase();
+  search.addEventListener('input', function (e) {
+    const term = e.target.value.toLowerCase();
 
-        document.querySelectorAll('.nav-link').forEach(link => {
-            const text = link.textContent.toLowerCase();
-            link.style.display = text.includes(term) ? '' : 'none';
-        });
-
-        document.querySelectorAll('.nav-section').forEach(section => {
-            const visible = section.querySelectorAll('.nav-link[style=""]').length;
-            section.style.display = visible > 0 ? '' : 'none';
-        });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      const text = link.textContent.toLowerCase();
+      link.style.display = text.includes(term) ? '' : 'none';
     });
+
+    document.querySelectorAll('.nav-section').forEach(section => {
+      const visible = section.querySelectorAll('.nav-link[style=""]').length;
+      section.style.display = visible > 0 ? '' : 'none';
+    });
+  });
 }
 
 // Click to copy code
-document.addEventListener('click', function(e) {
-    if (e.target.tagName === 'CODE') {
-        navigator.clipboard.writeText(e.target.textContent).then(() => {
-            const orig = e.target.textContent;
-            e.target.textContent = '✓ Copied!';
-            e.target.style.color = '#10B981';
-            setTimeout(() => {
-                e.target.textContent = orig;
-                e.target.style.color = '';
-            }, 2000);
-        });
-    }
+document.addEventListener('click', function (e) {
+  if (e.target.tagName === 'CODE') {
+    navigator.clipboard.writeText(e.target.textContent).then(() => {
+      const orig = e.target.textContent;
+      e.target.textContent = '✓ Copied!';
+      e.target.style.color = '#10B981';
+      setTimeout(() => {
+        e.target.textContent = orig;
+        e.target.style.color = '';
+      }, 2000);
+    });
+  }
 });
