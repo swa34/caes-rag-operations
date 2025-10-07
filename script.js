@@ -558,7 +558,7 @@ const article = reader.parse();</code></pre>
 
             <h3>5. External Services</h3>
             <ul>
-                <li><strong>OpenAI:</strong> Embeddings (text-embedding-3-large), Generation (GPT-4o-mini)</li>
+                <li><strong>OpenAI:</strong> Embeddings (text-embedding-3-large), Generation (GPT-5-mini)</li>
                 <li><strong>Dropbox:</strong> Document fetching</li>
             </ul>
 
@@ -608,8 +608,8 @@ const article = reader.parse();</code></pre>
             <h2>AI Services</h2>
             <ul>
                 <li><strong>Embeddings:</strong> text-embedding-3-large (3072-dim)</li>
-                <li><strong>Generation:</strong> GPT-4o-mini</li>
-                <li><strong>Re-ranking:</strong> GPT-4o-mini</li>
+                <li><strong>Generation:</strong> GPT-5-mini</li>
+                <li><strong>Re-ranking:</strong> GPT-5-mini</li>
             </ul>
 
             <h2>Cost</h2>
