@@ -417,21 +417,29 @@ match.score += adjustment;</code></pre>
 
             <h2>Crawlers</h2>
             <ul>
-                <li><strong>GaCounts:</strong> Georgia Counts reporting</li>
-                <li><strong>ABO:</strong> Admin & Business Operations</li>
-                <li><strong>OIT:</strong> IT help site</li>
-                <li><strong>OLOD:</strong> Leadership development</li>
-                <li><strong>OMC:</strong> Marketing communications</li>
-                <li><strong>Brand:</strong> Brand guidelines</li>
+                <li><strong>GaCounts:</strong> Georgia Counts reporting (ColdFusion)</li>
+                <li><strong>ABO:</strong> Admin & Business Operations policies (WordPress)</li>
+                <li><strong>OIT:</strong> IT help site (WordPress)</li>
+                <li><strong>OLOD:</strong> Leadership development (WordPress)</li>
+                <li><strong>OMC:</strong> Marketing communications (WordPress)</li>
+                <li><strong>Brand:</strong> Brand guidelines (WordPress)</li>
                 <li><strong>TeamDynamix:</strong> IT knowledge base</li>
+                <li><strong>Generic Intranet:</strong> Fallback for other authenticated sites</li>
+            </ul>
+
+            <h2>Authentication Types</h2>
+            <ul>
+                <li><strong>ColdFusion (pAuth):</strong> Token-based passthrough for GaCounts</li>
+                <li><strong>WordPress:</strong> Session-based authentication for content sites</li>
             </ul>
 
             <h2>How They Work</h2>
             <ol>
-                <li>Token-based auth (pAuth for ColdFusion)</li>
-                <li>JSDOM + Readability for clean text</li>
-                <li>Turndown for HTML → Markdown</li>
-                <li>Automatic pagination</li>
+                <li>Token-based or session-based authentication</li>
+                <li>JSDOM + Readability for clean text extraction</li>
+                <li>Turndown for HTML → Markdown conversion</li>
+                <li>Automatic pagination handling</li>
+                <li>Sitemap parsing for complete coverage</li>
             </ol>
 
             <div class="code-block">
