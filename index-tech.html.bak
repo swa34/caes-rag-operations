@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Implementation Techniques - Technical Reference</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Global Search -->
+    <div class="search-bar-fixed">
+        <div class="container">
+            <input type="text" id="globalSearch" placeholder="🔍 Search techniques, code examples..."
+                class="search-input">
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo">⚡</span>
+                <h1>RAG Implementation Techniques</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#retrieval">Retrieval</a></li>
+                <li><a href="#conversation">Conversation</a></li>
+                <li><a href="#optimization">Optimization</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    RAG System
+                    <br><span class="gradient-text">Implementation Techniques</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Technical deep dive into production-ready techniques: LLM re-ranking,
+                    question reframing, conversation memory, feedback learning, and more
+                </p>
+               
+            </div>
+        </div>
+    </header>
+
+    <!-- Retrieval Techniques -->
+    <section id="retrieval" class="section">
+        <div class="container">
+            <h2 class="section-title">Retrieval Optimization Techniques</h2>
+
+            <div class="technique-card">
+                <div class="tech-header">
+                    <h3>🎯 LLM Re-ranking</h3>
+                    <span class="tech-tag">Retrieval</span>
+                </div>
+
+                <div class="tech-body">
+                    <div class="tech-section">
+                        <h4>What It Is</h4>
+                        <p>Uses an LLM to semantically reorder retrieval results when vector similarity scores are
+                            ambiguous or insufficient.</p>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Why Use It</h4>
+                        <ul>
+                            <li><strong>Nuanced Understanding:</strong> LLMs catch semantic relationships vectors miss
+                            </li>
+                            <li><strong>Temporal Queries:</strong> Better handles "latest", "recent" questions</li>
+                            <li><strong>Comparison Queries:</strong> Understands "difference between X and Y"</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Implementation</h4>
+                        <div class="code-box">
+                            <pre><code>// Smart triggering (only 20-30% of queries)
+const shouldRerank = (
+  (matches[0].score - matches[2].score) < 0.05 ||
+  /\b(latest|recent|current)\b/i.test(query) ||
+  /\b(difference|versus|compare)\b/i.test(query)
+);
+
+if (shouldRerank) {
+  matches = await rerankWithLLM(matches, query);
+}</code></pre>
+                            <small>src/rag/vector-ops/retrieve.js</small>
+                        </div>
+                    </div>
+
+                    <div class="tech-metrics">
+                        <div class="metric"><span>Trigger Rate:</span> 20-30%</div>
+                        <div class="metric"><span>Latency:</span> 200-400ms</div>
+                        <div class="metric"><span>Cost:</span> ~$0.0001/query</div>
+                        <div class="metric"><span>Savings:</span> 70-80% vs always re-ranking</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <div class="tech-header">
+                    <h3>🏷️ Metadata Filtering</h3>
+                    <span class="tech-tag">Retrieval</span>
+                </div>
+
+                <div class="tech-body">
+                    <div class="tech-section">
+                        <h4>What It Is</h4>
+                        <p>Query-aware category detection filters vector search space before retrieval, reducing noise.
+                        </p>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Why Use It</h4>
+                        <ul>
+                            <li><strong>15-25% precision boost</strong> on category-specific queries</li>
+                            <li><strong>Zero latency</strong> - native Pinecone operation</li>
+                            <li><strong>Intent detection:</strong> "travel" → search HR/finance only</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Implementation</h4>
+                        <div class="code-box">
+                            <pre><code>const categoryKeywords = {
+  hr_financial: ['travel', 'reimbursement', 'expense'],
+  ga_counts: ['report', 'gacounts', 'submit'],
+  abo_policies: ['policy', 'procedure', 'guideline']
+};
+
+const categories = detectCategories(query);
+if (categories) {
+  queryParams.filter = { category: { $in: categories } };
+}</code></pre>
+                            <small>src/rag/vector-ops/retrieve.js</small>
+                        </div>
+                    </div>
+
+                    <div class="tech-metrics">
+                        <div class="metric"><span>Precision Gain:</span> 15-25%</div>
+                        <div class="metric"><span>Latency:</span> 0ms</div>
+                        <div class="metric"><span>Categories:</span> 14</div>
+                        <div class="metric"><span>Detection Rate:</span> ~40%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <div class="tech-header">
+                    <h3>📝 Acronym Expansion</h3>
+                    <span class="tech-tag">Domain Knowledge</span>
+                </div>
+
+                <div class="tech-body">
+                    <div class="tech-section">
+                        <h4>What It Is</h4>
+                        <p>Automatic detection and expansion of 210 domain-specific acronyms before embedding.</p>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Why Use It</h4>
+                        <ul>
+                            <li><strong>8-12% accuracy boost</strong> on acronym-heavy queries</li>
+                            <li><strong>Zero latency</strong> - in-memory lookup</li>
+                            <li><strong>Domain specific:</strong> "CAES" → "College of Agricultural and Environmental
+                                Sciences"</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Implementation</h4>
+                        <div class="code-box">
+                            <pre><code>// Load 210 acronyms at startup
+let acronymsCache = new Map();
+await db.query('SELECT acronym, definition FROM acronyms')
+  .then(r => r.rows.forEach(row =>
+    acronymsCache.set(row.acronym, row.definition)
+  ));
+
+// Expand in queries
+function expandAcronyms(query) {
+  for (const [acronym, def] of acronymsCache) {
+    query = query.replace(
+      new RegExp(`\\b${acronym}\\b`, 'gi'),
+      `${acronym} (${def})`
+    );
+  }
+  return query;
+}</code></pre>
+                            <small>src/rag/utils/acronymExpander.js</small>
+                        </div>
+                    </div>
+
+                    <div class="tech-metrics">
+                        <div class="metric"><span>Acronyms:</span> 210</div>
+                        <div class="metric"><span>Latency:</span> 0-2ms</div>
+                        <div class="metric"><span>Accuracy:</span> +8-12%</div>
+                        <div class="metric"><span>Memory:</span> ~50KB</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conversation Techniques -->
+    <section id="conversation" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Conversation Management Techniques</h2>
+
+            <div class="technique-card">
+                <div class="tech-header">
+                    <h3>💾 PostgreSQL Conversation Memory</h3>
+                    <span class="tech-tag">Infrastructure</span>
+                </div>
+
+                <div class="tech-body">
+                    <div class="tech-section">
+                        <h4>What It Is</h4>
+                        <p>Database-backed conversation history with session management, automatic cleanup, and
+                            multi-instance support.</p>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Why Use It</h4>
+                        <ul>
+                            <li><strong>Survives restarts:</strong> Unlike in-memory storage</li>
+                            <li><strong>Multi-instance ready:</strong> Shared state for horizontal scaling</li>
+                            <li><strong>30-min TTL:</strong> Automatic session cleanup</li>
+                            <li><strong>Analytics:</strong> Query patterns, session duration</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Implementation</h4>
+                        <div class="code-box">
+                            <pre><code>CREATE TABLE conversation_sessions (
+  id UUID PRIMARY KEY,
+  last_activity TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE conversations (
+  session_id UUID REFERENCES conversation_sessions(id),
+  role TEXT, -- 'user' or 'assistant'
+  content TEXT,
+  timestamp TIMESTAMPTZ DEFAULT NOW()
+);
+
+// Usage
+await db.query(`
+  INSERT INTO conversations (session_id, role, content)
+  VALUES ($1, $2, $3)
+`, [sessionId, role, content]);</code></pre>
+                            <small>src/conversationMemoryPostgres.js</small>
+                        </div>
+                    </div>
+
+                    <div class="tech-metrics">
+                        <div class="metric"><span>TTL:</span> 30 min</div>
+                        <div class="metric"><span>Max Turns:</span> 10</div>
+                        <div class="metric"><span>Query Time:</span> ~5ms</div>
+                        <div class="metric"><span>Multi-Instance:</span> ✓</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <div class="tech-header">
+                    <h3>🔄 Question Reframing</h3>
+                    <span class="tech-tag">LLM</span>
+                </div>
+
+                <div class="tech-body">
+                    <div class="tech-section">
+                        <h4>What It Is</h4>
+                        <p>Converts context-dependent follow-ups into standalone queries using conversation history.</p>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Why Use It</h4>
+                        <ul>
+                            <li><strong>Follow-up support:</strong> "What about drawbacks?" → standalone query</li>
+                            <li><strong>Pronoun resolution:</strong> "How do I use it?" → specific entity</li>
+                            <li><strong>Smart heuristics:</strong> Only triggers when needed (60% call reduction)</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Implementation</h4>
+                        <div class="code-box">
+                            <pre><code>// Detect if reframing needed
+function needsReframing(query, history) {
+  if (!history.length) return false;
+
+  const hasPronouns = /\b(it|this|that)\b/i.test(query);
+  const isShort = query.length < 30;
+  return hasPronouns || isShort;
+}
+
+// Reframe with LLM
+async function reframe(query, history) {
+  const context = history.slice(-3);
+  const prompt = `Given: ${context}
+  Rewrite "${query}" as standalone.`;
+
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [{ role: 'user', content: prompt }]
+  });
+
+  return response.choices[0].message.content;
+}</code></pre>
+                            <small>src/questionReframer.js</small>
+                        </div>
+                    </div>
+
+                    <div class="tech-metrics">
+                        <div class="metric"><span>LLM Calls Saved:</span> ~60%</div>
+                        <div class="metric"><span>Latency:</span> 200-500ms</div>
+                        <div class="metric"><span>Context:</span> 3 turns</div>
+                        <div class="metric"><span>Accuracy:</span> Significant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Optimization -->
+    <section id="optimization" class="section">
+        <div class="container">
+            <h2 class="section-title">Performance & Learning</h2>
+
+            <div class="technique-card">
+                <div class="tech-header">
+                    <h3>📊 Feedback Learning</h3>
+                    <span class="tech-tag">Optimization</span>
+                </div>
+
+                <div class="tech-body">
+                    <div class="tech-section">
+                        <h4>What It Is</h4>
+                        <p>Adjusts retrieval scores (±10%) based on aggregated user feedback (thumbs + comments).</p>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Why Use It</h4>
+                        <ul>
+                            <li><strong>Continuous improvement:</strong> Learns from real users</li>
+                            <li><strong>Fast lookup:</strong> Pre-computed scores in PostgreSQL</li>
+                            <li><strong>Nuanced scoring:</strong> "helpful with issues" = 0.7, helpful = 1.0</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-section">
+                        <h4>Implementation</h4>
+                        <div class="code-box">
+                            <pre><code>// Score comments (rule-based + LLM fallback)
+function scoreComment(rating, comment) {
+  const hasIssue = /outdated|broken.*link/i.test(comment);
+  if (rating === 'helpful' && hasIssue) return 0.7;
+  if (rating === 'helpful') return 1.0;
+  return 0.0;
+}
+
+// Aggregate & store
+const avgScore = totalScore / feedbackCount;
+await db.query(`
+  INSERT INTO feedback_scores (source_url, score)
+  VALUES ($1, $2) ON CONFLICT DO UPDATE
+`, [url, avgScore]);
+
+// Apply during retrieval
+const adjustment = (feedbackScore - 0.5) * 0.2; // ±0.1
+match.score += adjustment;</code></pre>
+                            <small>src/rag/feedback/feedbackLearningPostgres.js</small>
+                        </div>
+                    </div>
+
+                    <div class="tech-metrics">
+                        <div class="metric"><span>Adjustment:</span> ±10%</div>
+                        <div class="metric"><span>Lookup:</span>
+                            <1ms< /div>
+                                <div class="metric"><span>Scoring:</span> 3-tier</div>
+                                <div class="metric"><span>Source:</span> Google Sheets</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <div class="tech-header">
+                        <h3>✂️ Intelligent Chunking</h3>
+                        <span class="tech-tag">Processing</span>
+                    </div>
+
+                    <div class="tech-body">
+                        <div class="tech-section">
+                            <h4>What It Is</h4>
+                            <p>Context-aware text segmentation with smart boundaries and overlap.</p>
+                        </div>
+
+                        <div class="tech-section">
+                            <h4>Why Use It</h4>
+                            <ul>
+                                <li><strong>Smart boundaries:</strong> Paragraph > sentence > line > word</li>
+                                <li><strong>200-char overlap:</strong> Preserves context</li>
+                                <li><strong>400-char minimum:</strong> Filters useless tiny chunks</li>
+                                <li><strong>~30% vector reduction</strong> vs naive splitting</li>
+                            </ul>
+                        </div>
+
+                        <div class="tech-section">
+                            <h4>Implementation</h4>
+                            <div class="code-box">
+                                <pre><code>const CHUNK_SIZE = 1200;
+const OVERLAP = 200;
+const MIN_SIZE = 400;
+
+function findBoundary(text, idealEnd) {
+  // Priority: paragraph > sentence > line > word
+  let idx = text.lastIndexOf('\n\n', idealEnd);
+  if (idx > idealEnd - 200) return idx;
+
+  idx = text.lastIndexOf('. ', idealEnd);
+  if (idx > idealEnd - 200) return idx;
+
+  idx = text.lastIndexOf('\n', idealEnd);
+  if (idx > idealEnd - 200) return idx;
+
+  return text.lastIndexOf(' ', idealEnd);
+}</code></pre>
+                                <small>src/rag/ingestion/chunk.js</small>
+                            </div>
+                        </div>
+
+                        <div class="tech-metrics">
+                            <div class="metric"><span>Max Size:</span> 1200 chars</div>
+                            <div class="metric"><span>Overlap:</span> 200 chars</div>
+                            <div class="metric"><span>Min Size:</span> 400 chars</div>
+                            <div class="metric"><span>Reduction:</span> ~30%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technique-card">
+                    <div class="tech-header">
+                        <h3>📦 Tech Stack</h3>
+                        <span class="tech-tag">Infrastructure</span>
+                    </div>
+
+                    <div class="tech-body">
+                        <div class="stack-list">
+                            <div class="stack-item">
+                                <strong>PostgreSQL</strong>
+                                <p>Conversations, sessions, feedback scores, acronyms</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Pinecone</strong>
+                                <p>3072-dim vectors (text-embedding-3-large), serverless</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>OpenAI</strong>
+                                <p>Embeddings, generation (GPT-4o-mini) | ~$0.075/mo</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Express.js</strong>
+                                <p>Node.js backend with multi-user auth</p>
+                            </div>
+                        </div>
+
+                        <div class="file-refs">
+                            <h4>Key Files</h4>
+                            <code>src/rag/vector-ops/retrieve.js</code> - 5-stage pipeline<br>
+                            <code>src/conversationMemoryPostgres.js</code> - Session mgmt<br>
+                            <code>src/questionReframer.js</code> - Follow-up handling<br>
+                            <code>src/rag/utils/acronymExpander.js</code> - Acronym expansion<br>
+                            <code>src/rag/feedback/feedbackLearningPostgres.js</code> - Feedback
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+        <div class="container">
+            <h2>Explore the Implementation</h2>
+            <p>View the complete codebase with all techniques in production</p>
+            <a href="https://github.com/swa34/CAES-INTRANET-HELP-BOT" class="btn-cta" target="_blank">
+                View Source Code →
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>CAES RAG System - Technical Implementation Reference for Developers</p>
+            <p class="footer-meta">Production-ready techniques • Built by Scott Allen</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- CAES Help Chatbot -->
+    <!--  <iframe src="https://hospitalitychatbot-r7f2j.sevalla.app"
+            id="caes-chatbot-iframe"
+            title="CAES Help Chatbot"
+            style="position: fixed; bottom: 0; right: 0; border: none;
+                   width: 100vw; height: 100vh; pointer-events: none; z-index: 9999;">
+    </iframe> -->
+</body>
+
+</html>
