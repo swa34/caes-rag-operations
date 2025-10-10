@@ -2,6 +2,9 @@
 
 This repository contains interactive documentation for the CAES Intranet Help Bot RAG system, showcasing verified features and optimizations extracted from code analysis.
 
+## 🎉 Latest Update: October 10, 2025
+**Major Performance Breakthrough:** Achieved **89% response time reduction** (16.9s → 1.8s) through Redis caching implementation! See [REDIS_PERFORMANCE_UPDATE.md](./REDIS_PERFORMANCE_UPDATE.md) for details.
+
 ## 🌐 View Live Site
 
 Visit the interactive documentation: [Your GitHub Pages URL will be here]
@@ -19,15 +22,18 @@ Visit the interactive documentation: [Your GitHub Pages URL will be here]
 - **Authenticated Crawlers**: 8 specialized crawlers for intranet sites
 - And 17 more features...
 
-### Performance Optimizations (13+)
+### Performance Optimizations (15+) - **Updated Oct 10, 2025**
+- **🔥 Redis caching for Pinecone** (89% response time reduction - 16.9s → 1.8s!)
+- **🚀 GPT-5 Responses API optimization** (Fixed re-ranking with gpt-5-nano)
 - In-memory acronym cache (0-2ms overhead)
 - Smart LLM re-ranking triggers (70-80% cost savings)
 - Metadata filtering at DB level (15-25% precision boost)
 - Intelligent chunking (30% vector reduction)
 - Question reframing heuristics (60% LLM call reduction)
 - PostgreSQL session storage (multi-instance ready)
+- Pinecone pre-initialization at startup
 - Graceful fallbacks throughout
-- And 6 more optimizations...
+- And 5 more optimizations...
 
 ## 🚀 Features of This Documentation Site
 
