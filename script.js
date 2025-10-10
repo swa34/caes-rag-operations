@@ -71,7 +71,7 @@ REDIS_URL=redis://:PASSWORD@host:port/0
     title: 'LLM Re-ranking',
     content: `
             <h1>LLM Re-ranking</h1>
-            <p class="subtitle">Semantic reordering using GPT-4o-mini when vector scores are ambiguous</p>
+            <p class="subtitle">Semantic reordering using GPT-5-nano when vector scores are ambiguous</p>
 
             <h2>What It Is</h2>
             <p>Uses an LLM to reorder search results when vector similarity alone isn't enough.</p>
@@ -676,7 +676,7 @@ const article = reader.parse();</code></pre>
             <ul>
                 <li><strong>Embeddings:</strong> text-embedding-3-large (3072-dim)</li>
                 <li><strong>Generation:</strong> GPT-5-mini</li>
-                <li><strong>Re-ranking:</strong> GPT-5-mini</li>
+                <li><strong>Re-ranking:</strong> GPT-5-nano</li>
             </ul>
 
             <h2>Cost</h2>
