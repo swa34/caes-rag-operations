@@ -931,9 +931,93 @@ const article = reader.parse();</code></pre>
     title: 'System Architecture',
     content: `
             <h1>System Architecture</h1>
-            <p class="subtitle">5-layer architecture overview</p>
+            <p class="subtitle">Complete system architecture and query flow diagrams</p>
 
-            <h2>Layers</h2>
+            <h2>High-Level Query Flow</h2>
+
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <img src="./images/basic-2025-10-13-140748.png"
+                     alt="High-Level Query Flow"
+                     style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            </div>
+
+            <p>The diagram above shows the streamlined query processing flow:</p>
+            <ol>
+                <li><strong>Entry Point:</strong> User submits query via Web App or API</li>
+                <li><strong>Acronym Detection:</strong> Check if query contains acronyms and expand them</li>
+                <li><strong>Early Cache Check:</strong> Redis lookup before expensive operations</li>
+                <li><strong>Cache Hit:</strong> Return cached response immediately (~50ms)</li>
+                <li><strong>Cache Miss:</strong> Full RAG pipeline with retrieval, reranking, and generation (~1800ms)</li>
+                <li><strong>Persistence:</strong> Store response in cache and save conversation/feedback</li>
+            </ol>
+
+            <h2>Complete System Architecture</h2>
+
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <img src="./images/detail.png"
+                     alt="Detailed System Architecture"
+                     style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            </div>
+
+            <p>The comprehensive architecture diagram above illustrates all system components:</p>
+
+            <h3>🔵 INGESTION (Top Left)</h3>
+            <ul>
+                <li>Authenticated web crawlers for password-protected sites</li>
+                <li>Multiformat document processing (PDFs, HTML, Office docs)</li>
+                <li>Intelligent chunking for optimal retrieval</li>
+                <li>Document embedding and vector index storage</li>
+            </ul>
+
+            <h3>🔵 CLIENT (Top Right)</h3>
+            <ul>
+                <li>User interface (Intranet or Tool)</li>
+                <li>Web browser or API access</li>
+            </ul>
+
+            <h3>🔵 GATEWAY (Middle)</h3>
+            <ul>
+                <li>API and Web Server endpoints</li>
+                <li>SSO and authentication checks</li>
+                <li>Request logging and tracing</li>
+            </ul>
+
+            <h3>🔵 PREPROCESSING</h3>
+            <ul>
+                <li>Question reframing for context</li>
+                <li>Acronym detection and expansion</li>
+            </ul>
+
+            <h3>🔵 CACHE</h3>
+            <ul>
+                <li>Redis cache lookup for instant responses</li>
+                <li>Cache hit: Immediate response (~50ms)</li>
+                <li>Cache miss: Proceed to retrieval pipeline</li>
+            </ul>
+
+            <h3>🔵 RETRIEVAL</h3>
+            <ul>
+                <li>Metadata filtering for precision</li>
+                <li>Vector search across indexed documents</li>
+                <li>Result merging and deduplication</li>
+                <li>LLM-powered re-ranking (GPT-5-nano)</li>
+            </ul>
+
+            <h3>🔵 GENERATION</h3>
+            <ul>
+                <li>LLM answer generation with citations (GPT-5-mini)</li>
+                <li>Guardrails and validation</li>
+                <li>Safe fallback messages for edge cases</li>
+                <li>Redis cache write for future queries</li>
+            </ul>
+
+            <h3>🔵 PERSISTENCE</h3>
+            <ul>
+                <li>Database storage for conversations and feedback</li>
+                <li>Analytics and logs for monitoring</li>
+            </ul>
+
+            <h2>Key Architecture Layers</h2>
 
             <h3>1. Client Layer</h3>
             <ul>
@@ -959,29 +1043,15 @@ const article = reader.parse();</code></pre>
             <ul>
                 <li><strong>PostgreSQL:</strong> Conversations, sessions, feedback, acronyms</li>
                 <li><strong>Pinecone:</strong> 3072-dim vectors, metadata filtering</li>
+                <li><strong>Redis:</strong> Response caching (89% performance boost)</li>
                 <li><strong>Google Sheets:</strong> Raw feedback + fallback</li>
             </ul>
 
             <h3>5. External Services</h3>
             <ul>
-                <li><strong>OpenAI:</strong> Embeddings (text-embedding-3-large), Generation (GPT-5-mini)</li>
+                <li><strong>OpenAI:</strong> Embeddings (text-embedding-3-large), Generation (GPT-5-mini), Re-ranking (GPT-5-nano)</li>
                 <li><strong>Dropbox:</strong> Document fetching</li>
             </ul>
-
-            <h2>Data Flow</h2>
-            <ol>
-                <li>User query → Express</li>
-                <li>Load conversation history</li>
-                <li>Reframe if needed</li>
-                <li>Expand acronyms</li>
-                <li>Detect categories</li>
-                <li>Embed query</li>
-                <li>Vector search with filters</li>
-                <li>Adjust scores with feedback</li>
-                <li>Re-rank if needed</li>
-                <li>Generate response</li>
-                <li>Save conversation</li>
-            </ol>
 
             <h2>Learn More</h2>
             <ul>

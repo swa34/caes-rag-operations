@@ -6,6 +6,20 @@ The CAES Intranet Help Bot uses a sophisticated multi-layer RAG (Retrieval-Augme
 
 ## High-Level Architecture Flow
 
+### Simplified Flow Diagram
+
+![High-Level Query Flow](./images/basic-2025-10-13-140748.png)
+
+The diagram above shows the streamlined query processing flow:
+1. **Entry Point**: User submits query via Web App or API
+2. **Acronym Detection**: Check if query contains acronyms and expand them
+3. **Early Cache Check**: Redis lookup before expensive operations
+4. **Cache Hit**: Return cached response immediately (~50ms)
+5. **Cache Miss**: Full RAG pipeline with retrieval, reranking, and generation (~1800ms)
+6. **Persistence**: Store response in cache and save conversation/feedback
+
+### Detailed Layer-by-Layer Flow
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        User Query Input                          │
@@ -109,6 +123,52 @@ The CAES Intranet Help Bot uses a sophisticated multi-layer RAG (Retrieval-Augme
                             │  Stream to Client   │
                             └─────────────────────┘
 ```
+
+## Complete System Architecture
+
+![Detailed System Architecture](./images/detail.png)
+
+The comprehensive architecture diagram above illustrates all system components:
+
+**INGESTION** (Top Left):
+- Authenticated web crawlers
+- Multiformat document processing (PDFs, HTML, etc.)
+- Intelligent chunking for optimal retrieval
+- Document embedding and vector index storage
+
+**CLIENT** (Top Right):
+- User interface (Intranet or Tool)
+- Web browser or API access
+
+**GATEWAY** (Middle):
+- API and Web Server endpoints
+- SSO and authentication checks
+- Request logging and tracing
+
+**PREPROCESSING**:
+- Question reframing for context
+- Acronym detection and expansion
+
+**CACHE**:
+- Redis cache lookup for instant responses
+- Cache hit: Immediate response
+- Cache miss: Proceed to retrieval
+
+**RETRIEVAL**:
+- Metadata filtering for precision
+- Vector search across indexed documents
+- Result merging and deduplication
+- LLM-powered re-ranking
+
+**GENERATION**:
+- LLM answer generation with citations
+- Guardrails and validation
+- Safe fallback messages for edge cases
+- Redis cache write for future queries
+
+**PERSISTENCE**:
+- Database storage for conversations and feedback
+- Analytics and logs for monitoring
 
 ## Key Features by Layer
 
